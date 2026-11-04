@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ansika Yadav | Data Analyst, ML Student & UI/UX Designer</title>
+<meta name="description" content="Portfolio of a data analytics and machine learning student and UI/UX designer who builds responsive web interfaces: Python, SQL, Power BI, Scikit-learn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#13111f; --surface:#1d1a2f; --line:#322e4d;
+  --text:#ece9f7; --muted:#a29fbb;
+  --amber:#ffc857; --teal:#3dd6c6; --rose:#ff7a90;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'DM Sans',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.65;font-size:1.05rem;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+section{padding:6rem 0}
+h2{font-family:var(--display);font-size:clamp(2rem,4vw,2.8rem);line-height:1.1;margin-bottom:.6rem;letter-spacing:-.02em}
+.sub{color:var(--muted);max-width:52ch;margin-bottom:2.5rem}
+
+/* background grid + glow that follows cursor */
+body::before{content:"";position:fixed;inset:0;z-index:-2;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.28;
+  mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 20%,#000 20%,transparent 75%)}
+#glow{position:fixed;width:420px;height:420px;border-radius:50%;pointer-events:none;z-index:-1;
+  background:radial-gradient(circle,rgba(61,214,198,.14),transparent 65%);transform:translate(-50%,-50%);left:50%;top:30%}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:20;backdrop-filter:blur(14px);background:rgba(19,17,31,.7);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+.logo{font-family:var(--display);font-weight:800;font-size:1.25rem}
+.logo span{color:var(--amber)}
+nav ul{display:flex;gap:1.8rem;list-style:none}
+nav ul a{color:var(--muted);font-size:.95rem;transition:color .2s}
+nav ul a:hover,nav ul a.on{color:var(--text)}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);padding:.35rem .7rem;border-radius:8px;font-size:1rem;cursor:pointer}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:8rem}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center}
+.hi{font-family:var(--mono);color:var(--teal);font-size:.9rem;margin-bottom:1rem}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.8rem,7vw,5.2rem);line-height:1;letter-spacing:-.035em}
+h1 .out{color:transparent;-webkit-text-stroke:1.5px var(--amber)}
+.role{margin-top:1.4rem;font-size:1.2rem;color:var(--muted);min-height:2em}
+.role b{color:var(--text);font-weight:500;border-right:2px solid var(--amber);padding-right:3px;animation:blink .8s steps(1) infinite}
+@keyframes blink{50%{border-color:transparent}}
+.lead{margin:1rem 0 2rem;max-width:46ch;color:var(--muted)}
+.btns{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.4rem;border-radius:10px;font-weight:500;border:1px solid var(--line);transition:transform .2s,background .2s,border-color .2s}
+.btn:hover{transform:translateY(-3px);border-color:var(--teal)}
+.btn.main{background:var(--amber);color:#1b1608;border-color:var(--amber)}
+.btn.main:hover{background:#ffd679}
+.btn svg{width:18px;height:18px;fill:currentColor}
+
+/* live chart card */
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:1.4rem;box-shadow:0 30px 60px -30px #000}
+.dots{display:flex;gap:6px;margin-bottom:1rem}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i:nth-child(1){background:var(--rose)}.dots i:nth-child(2){background:var(--amber)}.dots i:nth-child(3){background:var(--teal)}
+.code{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-bottom:1rem}
+.code em{color:var(--teal);font-style:normal}
+.bars{display:flex;align-items:flex-end;gap:10px;height:170px;border-bottom:1px solid var(--line)}
+.bar{flex:1;height:0;border-radius:6px 6px 0 0;background:var(--teal);position:relative;transition:height 1s cubic-bezier(.2,.8,.2,1)}
+.bar.low{background:var(--rose)}.bar.top{background:var(--amber)}
+.bar span{position:absolute;top:-1.4rem;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+.labels{display:flex;gap:10px;font-family:var(--mono);font-size:.7rem;color:var(--muted);margin-top:.5rem}
+.labels span{flex:1;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:1.2rem}
+.stats div{border:1px solid var(--line);border-radius:10px;padding:.6rem .8rem}
+.stats b{display:block;font-family:var(--display);font-size:1.4rem}
+.stats small{color:var(--muted);font-size:.75rem}
+
+/* skills */
+.chips{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem}
+.chip{background:none;border:1px solid var(--line);color:var(--muted);padding:.45rem 1rem;border-radius:99px;cursor:pointer;font:inherit;font-size:.92rem;transition:.2s}
+.chip:hover{color:var(--text);border-color:var(--teal)}
+.chip.on{background:var(--teal);border-color:var(--teal);color:#08211e}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.2rem}
+.skill{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.5rem;transition:transform .25s,border-color .25s}
+.skill:hover{transform:translateY(-4px);border-color:var(--amber)}
+.skill.hide{display:none}
+.skill h3{font-family:var(--display);font-size:1.25rem;margin-bottom:.3rem}
+.skill p{color:var(--muted);font-size:.95rem;margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.tags span{font-family:var(--mono);font-size:.74rem;padding:.2rem .6rem;border-radius:6px;background:rgba(61,214,198,.1);color:var(--teal)}
+
+/* projects */
+.proj{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:2rem;display:flex;flex-direction:column;transition:border-color .25s}
+.card:hover{border-color:var(--amber)}
+.card .kind{font-family:var(--mono);font-size:.78rem;color:var(--amber);margin-bottom:.8rem}
+.card h3{font-family:var(--display);font-size:1.5rem;line-height:1.2;margin-bottom:.8rem}
+.card ul{list-style:none;color:var(--muted);font-size:.96rem;margin-bottom:1.4rem}
+.card li{padding-left:1.3rem;position:relative;margin-bottom:.45rem}
+.card li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:2px;background:var(--teal)}
+.card .tags{margin-top:auto}
+.card .tags span{background:rgba(255,200,87,.1);color:var(--amber)}
+.card .go{margin-top:1.2rem;font-weight:500;color:var(--text);display:inline-block;border-bottom:1px solid var(--amber);align-self:flex-start}
+.card .go:hover{color:var(--amber)}
+
+/* leadership timeline */
+.lead-box{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:start}
+.badge{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:2rem;position:sticky;top:90px}
+.badge h3{font-family:var(--display);font-size:1.6rem;line-height:1.15;margin:.6rem 0}
+.badge p{color:var(--muted)}
+.aws{display:inline-block;font-family:var(--mono);font-size:.78rem;background:var(--amber);color:#1b1608;padding:.2rem .7rem;border-radius:6px}
+.steps{border-left:2px solid var(--line);padding-left:2rem}
+.steps div{position:relative;margin-bottom:1.8rem}
+.steps div::before{content:"";position:absolute;left:calc(-2rem - 7px);top:.55em;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--teal)}
+.steps div:hover::before{background:var(--teal)}
+.steps p{color:var(--muted)}
+
+/* contact */
+.contact{text-align:center}
+.contact h2{font-size:clamp(2.2rem,6vw,4rem)}
+.contact .sub{margin:0 auto 2rem}
+.contact .btns{justify-content:center}
+footer{border-top:1px solid var(--line);padding:2rem 0;text-align:center;color:var(--muted);font-size:.9rem}
+
+/* reveal: only used once for the hero sequence + scroll reveal on section headings */
+.rise{opacity:0;transform:translateY(24px);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+.rise:nth-child(2){animation-delay:.12s}.rise:nth-child(3){animation-delay:.24s}.rise:nth-child(4){animation-delay:.36s}.rise:nth-child(5){animation-delay:.48s}
+@keyframes rise{to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  .hero .wrap,.proj,.lead-box{grid-template-columns:1fr}
+  .badge{position:static}
+  nav ul{display:none;position:absolute;top:64px;left:0;right:0;flex-direction:column;background:var(--bg);padding:1.2rem 1.5rem;border-bottom:1px solid var(--line)}
+  nav ul.open{display:flex}
+  .menu{display:block}
+  section{padding:4.5rem 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .rise,.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="glow"></div>
+
+<nav>
+  <div class="wrap">
+    <a href="#home" class="logo">AY<span>.</span></a>
+    <button class="menu" aria-label="Open menu" onclick="document.querySelector('nav ul').classList.toggle('open')">Menu</button>
+    <ul>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <p class="hi rise">hello, world. I'm</p>
+      <h1 class="rise">Ansika <span class="out">Yadav</span></h1>
+      <p class="role rise">I work on <b id="typed"></b></p>
+      <p class="lead rise">Student at Chandigarh University, Uttar Pradesh. I'm also a UI/UX designer who builds responsive web interfaces. I turn raw data into clean analysis, working models and dashboards, and design the interfaces people use to explore them.</p>
+      <div class="btns rise">
+        <a class="btn main" href="#projects">See my projects</a>
+        <a class="btn" href="https://github.com/your-username" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/your-username" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="chart rise" aria-label="Animated bar chart of sample student marks">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <p class="code">df = pd.DataFrame(marks)<br>df.<em>describe()</em></p>
+      <div class="bars" id="bars"></div>
+      <div class="labels" id="labels"></div>
+      <div class="stats">
+        <div><b id="s-avg">0</b><small>average</small></div>
+        <div><b id="s-max">0</b><small>highest</small></div>
+        <div><b id="s-pass">0%</b><small>pass rate</small></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="wrap">
+    <h2 class="reveal">What I work with</h2>
+    <p class="sub reveal">From writing queries to training models and publishing dashboards.</p>
+    <div class="chips reveal" role="tablist">
+      <button class="chip on" data-f="all">All</button>
+      <button class="chip" data-f="code">Programming</button>
+      <button class="chip" data-f="data">Data</button>
+      <button class="chip" data-f="ml">Machine learning</button>
+      <button class="chip" data-f="bi">Business intelligence</button>
+      <button class="chip" data-f="design">UI/UX design</button>
+    </div>
+    <div class="skills">
+      <article class="skill reveal" data-c="code"><h3>Programming</h3><p>Python scripting, C fundamentals with DSA, R programming and SQL for database querying.</p><div class="tags"><span>Python</span><span>C</span><span>R</span><span>SQL</span></div></article>
+      <article class="skill reveal" data-c="data"><h3>Data analysis</h3><p>Cleaning, filtering, aggregation, EDA, descriptive statistics, missing-value checks and visualisation.</p><div class="tags"><span>NumPy</span><span>Pandas</span><span>Matplotlib</span><span>Seaborn</span><span>Excel</span></div></article>
+      <article class="skill reveal" data-c="ml"><h3>Machine learning</h3><p>Linear regression, KNN, SVM, Random Forest, stacking, GridSearchCV, cosine similarity and recommendation-system basics.</p><div class="tags"><span>Scikit-learn</span><span>Regression</span><span>Classification</span><span>Model evaluation</span></div></article>
+      <article class="skill reveal" data-c="bi"><h3>Business intelligence</h3><p>Interactive dashboards, sales KPIs, MTD/QTD calculations and clear business insights.</p><div class="tags"><span>Power BI</span><span>DAX</span><span>Microsoft Fabric</span></div></article>
+      <article class="skill reveal" data-c="design"><h3>UI/UX design</h3><p>Designing user-friendly, responsive web interfaces that look right and work smoothly on phones, tablets and desktops.</p><div class="tags"><span>UI design</span><span>UX design</span><span>Responsive design</span><span>HTML</span><span>CSS</span></div></article>
+      <article class="skill reveal" data-c="code data"><h3>Databases and tools</h3><p>Working with datasets, notebooks, repositories, database fundamentals and project documentation.</p><div class="tags"><span>DBMS</span><span>SQLite</span><span>Jupyter</span><span>VS Code</span><span>GitHub</span><span>Kaggle</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2 class="reveal">Projects</h2>
+    <p class="sub reveal">Hands-on work with real structure: a dataset, a question, and a result.</p>
+    <div class="proj">
+      <article class="card reveal">
+        <p class="kind">Practical project</p>
+        <h3>Student Marks Analysis with Python and Pandas</h3>
+        <ul>
+          <li>Built a multi-subject student marks dataset.</li>
+          <li>Used Python lists and dictionaries, NumPy arrays and a Pandas DataFrame.</li>
+          <li>Analysed averages, highest and lowest marks, pass percentage and grade distribution.</li>
+          <li>Flagged students who need support and checked for invalid marks.</li>
+          <li>Explored basic charts and visualisation.</li>
+        </ul>
+        <div class="tags"><span>Python</span><span>NumPy</span><span>Pandas</span><span>Matplotlib</span></div>
+        <a class="go" href="https://github.com/your-username/student-marks-analysis" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="card reveal">
+        <p class="kind">Business intelligence</p>
+        <h3>Walmart Sales Analysis Dashboard</h3>
+        <ul>
+          <li>Built an interactive Power BI dashboard to track Walmart sales performance.</li>
+          <li>Added KPI cards that summarise the key metrics at a glance.</li>
+          <li>Explored sales trends and patterns with charts.</li>
+          <li>Used data modelling and DAX measures for interactive analysis.</li>
+          <li>Designed the layout so business insights are easy to read.</li>
+        </ul>
+        <div class="tags"><span>Power BI</span><span>DAX</span><span>Data cleaning</span><span>Dashboard design</span></div>
+        <a class="go" href="https://github.com/your-username/walmart-sales-dashboard" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="community">
+  <div class="wrap">
+    <h2 class="reveal">Leadership and community</h2>
+    <p class="sub reveal">Learning is faster when you build it together.</p>
+    <div class="lead-box">
+      <aside class="badge reveal">
+        <span class="aws">AWS</span>
+        <h3>Founding Member, AWS Student Builder Group</h3>
+        <p>Chandigarh University, Uttar Pradesh</p>
+        <div class="tags" style="margin-top:1rem"><span>AWS Cloud</span><span>Community</span><span>Peer learning</span><span>AI/ML</span></div>
+      </aside>
+      <div class="steps">
+        <div class="reveal"><p>Helping build a student-led technical community focused on AWS and cloud computing.</p></div>
+        <div class="reveal"><p>Encouraging peer-to-peer learning through technical discussions, polls, quizzes and interactive activities.</p></div>
+        <div class="reveal"><p>Spreading awareness of cloud technologies, AI/ML, DevOps, data engineering and cybersecurity.</p></div>
+        <div class="reveal"><p>Supporting student engagement and collaborative learning through community initiatives.</p></div>
+        <div class="reveal"><p>Creating a space where students can explore emerging technologies and build practical skills.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2 class="reveal">Let's work together</h2>
+    <p class="sub reveal">Open to internships, data projects, UI/UX and web design work, and collaborations. Message me on LinkedIn or check my code on GitHub.</p>
+    <div class="btns reveal">
+      <a class="btn main" href="https://www.linkedin.com/in/ansika-yadav-" target="_blank" rel="noopener">Message on LinkedIn</a>
+      <a class="btn" href="https://github.com/yanshika076-ship-it" target="_blank" rel="noopener">Browse GitHub</a>
+      <a class="btn" href="yanshika076@gmail.com">Send an email</a>
+    </div>
+  </div>
+</section>
+
+<footer>© <span id="yr"></span> Ansika Yadav. Built with HTML, CSS and JavaScript.</footer>
+
+<script>
+// ---- Hero: sample marks chart (builds once on load) ----
+const marks=[['Maths',82],['Physics',64],['Chem',91],['CS',97],['Eng',58],['Stats',76],['DBMS',88]];
+const bars=document.getElementById('bars'),labels=document.getElementById('labels');
+const max=Math.max(...marks.map(m=>m[1])),min=Math.min(...marks.map(m=>m[1]));
+marks.forEach(([n,v])=>{
+  const b=document.createElement('div');b.className='bar'+(v===max?' top':v===min?' low':'');
+  b.innerHTML='<span>'+v+'</span>';b.dataset.h=v;bars.appendChild(b);
+  const l=document.createElement('span');l.textContent=n;labels.appendChild(l);
+});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+setTimeout(()=>bars.querySelectorAll('.bar').forEach((b,i)=>setTimeout(()=>b.style.height=b.dataset.h+'%',reduce?0:i*110)),500);
+const avg=Math.round(marks.reduce((a,m)=>a+m[1],0)/marks.length),pass=Math.round(marks.filter(m=>m[1]>=40).length/marks.length*100);
+function count(id,to,suffix=''){const el=document.getElementById(id);let t0=null;
+  const step=t=>{t0??=t;const p=Math.min((t-t0)/1400,1);el.textContent=Math.round(to*p)+suffix;if(p<1)requestAnimationFrame(step)};
+  reduce?el.textContent=to+suffix:requestAnimationFrame(step)}
+setTimeout(()=>{count('s-avg',avg);count('s-max',max);count('s-pass',pass,'%')},700);
+
+// ---- Typing effect ----
+const words=['data analysis in Python','machine learning models','Power BI dashboards','SQL and databases','responsive UI/UX design','cloud communities on AWS'];
+const typed=document.getElementById('typed');let w=0,c=0,del=false;
+function type(){
+  const cur=words[w];
+  typed.textContent=cur.slice(0,c);
+  if(!del&&c===cur.length){del=true;return setTimeout(type,1400)}
+  if(del&&c===0){del=false;w=(w+1)%words.length}
+  c+=del?-1:1;setTimeout(type,del?35:70);
+}
+reduce?typed.textContent=words[0]:type();
+
+// ---- Skill filter ----
+document.querySelectorAll('.chip').forEach(ch=>ch.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));ch.classList.add('on');
+  const f=ch.dataset.f;
+  document.querySelectorAll('.skill').forEach(s=>s.classList.toggle('hide',f!=='all'&&!s.dataset.c.split(' ').includes(f)));
+}));
+
+// ---- Scroll reveal ----
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ---- Active nav link ----
+const links=[...document.querySelectorAll('nav ul a')];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section').forEach(s=>so.observe(s));
+links.forEach(a=>a.addEventListener('click',()=>document.querySelector('nav ul').classList.remove('open')));
+
+// ---- Cursor glow ----
+const glow=document.getElementById('glow');
+addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'});
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
